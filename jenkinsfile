@@ -1,37 +1,39 @@
-pipeline{
-    agents any
-    tools{
+pipeline {
+    agent any
+    tools {
         nodejs 'nodejs10'
     }
-    stages{
-        stage('git checkout'){
-            steps{
-                git 'github url'
+
+    stages {
+        stage('Git checkout') {
+            steps {
+                git branch: 'main', changelog: false, poll: false, url: 'https://github.com/kpselvaips/nodejs_assesment.git'
             }
         }
-        stage('install dependencies'){
-            steps{
-                sh 'npm install'
+        
+        stage('Install dependencies') {
+            steps {
+                sh "npm install"
             }
         }
-        stage('Build the docker image'){
-            steps{
-                sh 'docker build -t newimage .'
-                sh 'docker tag newimage nodejs:${BUILD_NUMBER}'
-            }
-        }
-        stage('Push the image to docker'){
-            steps{
-                withCredentials([string(credentialsID:'dockerpass',variable:'dockerpassword')]){
-                    sh 'docker login -u kpselva46 -p ${dockerpass}'
+        stage('docker build & push') {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'd56910ff-ac76-4e5f-bfba-a4ec4ccd9e33', toolName: 'docker') {
+                        sh 'docker build -t newimage .'
+                        sh 'docker tag newimage kpselvaperiyasamy/nodejs:${BUILD_NUMBER}'
+                        sh 'docker push kpselvaperiyasamy/nodejs:${BUILD_NUMBER}'
+                    }
                 }
-                sh 'docker image push nodejs:${BUILD_NUMBER}'
             }
         }
-        stage('deployment'){
-            steps{
-                sh 'kubectl apply -f <filepath>'
-                sh 'kubectl rollout restart deployment loadbalancer-pod'
+        stage('docker container') {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'd56910ff-ac76-4e5f-bfba-a4ec4ccd9e33', toolName: 'docker') {
+                        sh 'docker run -d --name demo-nodejssamp -p 8081:8081 kpselvaperiyasamy/nodejs:${BUILD_NUMBER}'
+                    }
+                }
             }
         }
     }
