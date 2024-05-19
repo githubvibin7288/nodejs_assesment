@@ -1,0 +1,38 @@
+pipeline{
+    agents any
+    tools{
+        nodejs 'nodejs10'
+    }
+    stages{
+        stage('git checkout'){
+            steps{
+                git 'github url'
+            }
+        }
+        stage('install dependencies'){
+            steps{
+                sh 'npm install'
+            }
+        }
+        stage('Build the docker image'){
+            steps{
+                sh 'docker build -t newimage .'
+                sh 'docker tag newimage nodejs:${BUILD_NUMBER}'
+            }
+        }
+        stage('Push the image to docker'){
+            steps{
+                withCredentials([string(credentialsID:'dockerpass',variable:'dockerpassword')]){
+                    sh 'docker login -u kpselva46 -p ${dockerpass}'
+                }
+                sh 'docker image push nodejs:${BUILD_NUMBER}'
+            }
+        }
+        stage('deployment'){
+            steps{
+                sh 'kubectl apply -f <filepath>'
+                sh 'kubectl rollout restart deployment loadbalancer-pod'
+            }
+        }
+    }
+}
