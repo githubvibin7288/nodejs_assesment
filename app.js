@@ -10,5 +10,5 @@ app.get('/', function(req, res){
 
 /* istanbul ignore next */
   app.listen(8084, function() {
-  console.log('Express started on port 3000');
+  console.log('Express started on port 8084');
 });
