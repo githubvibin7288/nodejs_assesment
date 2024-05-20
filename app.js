@@ -1,4 +1,4 @@
-'use strict'
+8'use strict'
 
 var express = require('express');
 
@@ -9,6 +9,6 @@ app.get('/', function(req, res){
 });
 
 /* istanbul ignore next */
-  app.listen(8084, function() {
-  console.log('Express started on port 8084');
+  app.listen(8100, function() {
+  console.log('Express started on port 8100');
 });
