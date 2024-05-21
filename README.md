@@ -15,15 +15,18 @@ Tasks: -
 •	Setup the CD pipeline to:
 •	Deploy the Docker container to a simulated staging environment upon successful CI build.
 •	Provide rollback capabilities in case deployment fails.
+
 Project Overview: -
 Project Name: Simple web application in CI/CD pipeline
 Delivery Platform: Jenkins
 Project Components and Pipeline
 Jenkins Files: This application own Jenkins File defining the steps for building, testing, and deploying the service
 Docker: Microservices are containerized using Docker, allowing for consistent environments from development to production.
+
 GitHub Repository Link: - 
 Continuous Integration  GitHub –webhook Jenkins  Docker
 Continuous Delivery  Docker containerization
+
 PHASE 1: Infrastructure Setup
 Launch virtual Machine using AWS EC2:
 Here is a detailed list of the basic requirements and setup for the EC2 instance I have used for running Jenkins, including the specific instance type, AMI, and Security groups.
