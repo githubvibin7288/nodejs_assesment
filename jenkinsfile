@@ -1,4 +1,5 @@
 
+
 pipeline {
     agent any
     tools {
@@ -8,7 +9,7 @@ pipeline {
     stages {
         stage('Git checkout') {
             steps {
-                git branch: 'main', changelog: false, poll: false, url: 'https://github.com/kpselvaips/nodejs_assesment.git'
+                git branch: 'main', changelog: false, poll: false, url: 'https://github.com/kpselvaperiyasamy/nodejs_assesment.git'
             }
         }
         
@@ -29,15 +30,8 @@ pipeline {
                 }
             }
         }
-        stage('remove previous container'){
-            try{
-                sh 'docker rm -f demo-nodejssample'
-            }
-            catch(error){
-                // do nothing
-            }
-        }
-        stage('docker container') {
+        
+        stage('docker deployment') {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
