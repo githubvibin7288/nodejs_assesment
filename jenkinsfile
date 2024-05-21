@@ -33,7 +33,7 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                        sh 'docker run -d --name demo-nodejssample -p 8080:3000 kpselvaperiyasamy/nodejsassesment:${BUILD_NUMBER}'
+                        sh 'docker run -d --name demo-nodejssample10 -p 8080:3000 kpselvaperiyasamy/nodejsassesment:${BUILD_NUMBER}'
                     }
                 }
             }
