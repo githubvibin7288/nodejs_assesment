@@ -1,3 +1,4 @@
+
 pipeline {
     agent any
     tools {
@@ -16,13 +17,14 @@ pipeline {
                 sh "npm install"
             }
         }
+    
         stage('docker build & push') {
             steps {
                 script {
-                    withDockerRegistry(credentialsId: 'd56910ff-ac76-4e5f-bfba-a4ec4ccd9e33', toolName: 'docker') {
+                    withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
                         sh 'docker build -t newimage .'
-                        sh 'docker tag newimage kpselvaperiyasamy/nodejs:${BUILD_NUMBER}'
-                        sh 'docker push kpselvaperiyasamy/nodejs:${BUILD_NUMBER}'
+                        sh 'docker tag newimage kpselvaperiyasamy/nodejsassesment:${BUILD_NUMBER}'
+                        sh 'docker push kpselvaperiyasamy/nodejsassesment:${BUILD_NUMBER}'
                     }
                 }
             }
@@ -30,8 +32,8 @@ pipeline {
         stage('docker container') {
             steps {
                 script {
-                    withDockerRegistry(credentialsId: 'd56910ff-ac76-4e5f-bfba-a4ec4ccd9e33', toolName: 'docker') {
-                        sh 'docker run -d --name demo-nodejssamp -p 8081:3000 kpselvaperiyasamy/nodejs:${BUILD_NUMBER}'
+                    withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
+                        sh 'docker run -d --name demo-nodejssample -p 8080:3000 kpselvaperiyasamy/nodejsassesment:${BUILD_NUMBER}'
                     }
                 }
             }
