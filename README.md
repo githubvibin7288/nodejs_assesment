@@ -40,8 +40,10 @@ EC2 instance requirement setup:
 -	AMI: ubuntu Server 22.04 LTS (HVM)
 3.	Security Groups
 Security groups act as a virtual firewall for your instance to control inbound and outbound traffic.
-Screenshot of SG: 
+Screenshot of SG:
+
  ![Screenshot Security Group](https://github.com/kpselvaperiyasamy/nodejs_assesment/assets/170388524/a92092d0-b0fa-4b38-81ea-927e7ceb5f64)
+
 After Launching your virtual machine, SSH into the server.
 Install Jenkins, Docker on VM Server
 Execute the commands on the server.
@@ -70,6 +72,7 @@ then you can run the script using:
 This script will automate the installation process of OpenJDK 17 and Jenkins
 
 Screenshot of Install 
+
  ![Screenshot Version checking](https://github.com/kpselvaperiyasamy/nodejs_assesment/assets/170388524/4920f7a6-551d-4034-bc27-69b1d2b5a076)
 
 Phase 2: Create a Jenkins Pipeline
@@ -83,7 +86,9 @@ As per project requirement container must run on port 8080, in mean while Jenkin
 2.	After open this file under Environment section, you can change the port like this HHTP_PORT=8100
 3.	Then you should restart Jenkins with sudo systemctl daemon reload
 4.	Then check the status use this command sudo systemctl restart Jenkins.service
+
 Screenshot for change port number of Jenkins 
+
  ![Screenshot jenkis port change](https://github.com/kpselvaperiyasamy/nodejs_assesment/assets/170388524/af4cfe1e-8fab-4f83-8725-b7541fe31228)
 
 
@@ -95,6 +100,7 @@ Search for and install the following plugins:
 •	Docker Pipeline: Allows Jenkins to use Docker containers in pipeline jobs.
 •	NodeJS: Allows to create as many NodeJS installations.
 Screenshot of plugin 
+
  ![Screenshot 2024-05-21 083645](https://github.com/kpselvaperiyasamy/nodejs_assesment/assets/170388524/8760135f-7cb0-4593-865b-e8d07710370f)
 
 
@@ -112,6 +118,7 @@ Create Docker Credentials:
 
 
 Screenshot of Docker Cred 
+
  ![Screenshot 2024-05-21 083912](https://github.com/kpselvaperiyasamy/nodejs_assesment/assets/170388524/ee7c2ced-643d-4a10-982c-f0321313fa50)
 
 
@@ -122,6 +129,7 @@ Create GitHub Credentials:
 -Secret: Your GitHub Personal Access Token.
 -Click OK.
 Screenshot of Git cred 
+
  ![Screenshot 2024-05-21 084735](https://github.com/kpselvaperiyasamy/nodejs_assesment/assets/170388524/7a26d975-42fe-40e6-b9cf-b31e382944c6)
 
 
@@ -135,6 +143,7 @@ Step 3: Install NodeJS and Docker on Jenkins
 -then select Install automatically  Download from docker.com  then leave the remain settings as Jenkins
 -Click apply and save.
 Screenshot of Nodejs and Docker tools config 
+
  ![Screenshot 2024-05-21 084811](https://github.com/kpselvaperiyasamy/nodejs_assesment/assets/170388524/d053f765-c086-4e9a-9d36-f47826778913)
 
 ![Screenshot 2024-05-21 084847](https://github.com/kpselvaperiyasamy/nodejs_assesment/assets/170388524/f1bd67ce-c54a-4be3-9762-22816278a57e)
@@ -199,6 +208,7 @@ pipeline {
 }
 
 Screenshot of Output  
+
  ![Screenshot 2024-05-21 103204](https://github.com/kpselvaperiyasamy/nodejs_assesment/assets/170388524/a4ee08c7-f39d-4b88-926a-c92b1afb6492)
 
 
@@ -226,6 +236,7 @@ Add Webhook:
 -Remain settings leave it as Usual.
 -Click add webhook.
 Screenshot of webhook 
+
  ![Screenshot 2024-05-21 120921](https://github.com/kpselvaperiyasamy/nodejs_assesment/assets/170388524/1720247d-23d0-43ab-8f2b-e1f91918526c)
 
 After Completing this you will see your Jenkins pipeline starts build automatically.
@@ -233,11 +244,14 @@ Step 6: Edit application file
 Go to GitHub and make a change of app.js file and commit the changes.
 Once done commit, then trigger automatically push to build pipeline.
 Screenshot of make change the file 
+
 ![Screenshot 2024-05-21 120452](https://github.com/kpselvaperiyasamy/nodejs_assesment/assets/170388524/646743cb-a9fc-4322-94b8-16eb1d2eeb88)
  
 Final output after commit the changes:
 Screenshot of final output; 
+
  ![Screenshot 2024-05-21 120633](https://github.com/kpselvaperiyasamy/nodejs_assesment/assets/170388524/cb2ef6f3-38bf-4c02-88aa-500eff6d545a)
+ 
  ![Screenshot 2024-05-21 120827](https://github.com/kpselvaperiyasamy/nodejs_assesment/assets/170388524/b0cbff92-0116-4835-b7b5-fd2ce6e2eb68)
 
 
