@@ -5,7 +5,7 @@ var express = require('express');
 var app = express();
 
 app.get('/', function(req, res){
-  res.send('Hello World, This is my assesment completed stage');
+  res.send('Hello World, This');
 });
 
 /* istanbul ignore next */
