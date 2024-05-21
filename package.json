@@ -3,12 +3,15 @@
         "express":"*"
     },
     "scripts": {
-        "start": "node app.js"
+        "start": "node app.js",
+        "test":"jest"
     },
     "name": "basic-node.js",
     "version": "1.0.0",
     "main":"app.js",
-    "devDependencies": {},
+    "devDependencies": {
+        "jest":"^27.0.0"
+    },
     "author": "Selva",
     "license":"MIT",
     "description": "NodeJS project with Express Framework and Running in Docker Container"
