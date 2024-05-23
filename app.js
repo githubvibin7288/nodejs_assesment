@@ -5,7 +5,7 @@ var express = require('express');
 var app = express();
 
 app.get('/', function(req, res){
-  res.send('Hi this is vibin, My Assesment completed\n');
+  res.send('Hi this is vibin, My project completed\n');
 });
 
 /* istanbul ignore next */
